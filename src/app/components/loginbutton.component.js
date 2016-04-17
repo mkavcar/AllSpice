@@ -3,7 +3,7 @@ angular
   .module('allSpiceApp')
   .component("saLoginButton", {
     controller: LoginButtonController,
-    templateUrl: 'app/components/loginButton.html'
+    templateUrl: 'app/components/loginbutton.html'
 });
 
 LoginButtonController.$inject = ['authService'];

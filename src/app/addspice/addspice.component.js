@@ -3,7 +3,7 @@ angular
   .module('allSpiceApp')
   .component("addSpice", {
     controller: AddSpiceController,
-    templateUrl: 'app/addspice/addSpice.html'
+    templateUrl: 'app/addspice/addspice.html'
 });
 
 AddSpiceController.$inject = ['$firebaseArray', 'spiceApi', '$timeout'];

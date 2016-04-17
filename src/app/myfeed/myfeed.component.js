@@ -3,7 +3,7 @@ angular
   .module('allSpiceApp')
   .component("myFeed", {
     controller: MyFeedController,
-    templateUrl: 'app/myfeed/myFeed.html'
+    templateUrl: 'app/myfeed/myfeed.html'
 });
 
 MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService'];

@@ -1,0 +1,60 @@
+<div class="container-fluid" style="max-width:1000px;margin-bottom:15px;background:#ccc">
+      <div class="row" style="background:white;">
+        <div class="col-sm-6">
+          <div class="row" ng-show="$root.auth.isLoggedIn()">
+            <div ng-show="$ctrl.showConfirm !== true" class="col-xs-12" style="background:#89E894;padding-bottom:10px;padding-top:10px;">
+              <button ng-hide="$root.auth.getUser().uid === $ctrl.spice.user.uid"  ng-click="$ctrl.togglePin($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-heart" aria-hidden="true" style="top: 2px;" title="Pin\Unpin to My Feed"></span> {{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'Unpin' : 'Pin' }}</button>
+              <button ng-show="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.edit($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="top: 2px;"></span> Edit</button>
+              <button ng-show="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.showConfirm = true" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="top: 2px;"></span> Delete</button>
+            </div>
+            <div ng-show="$ctrl.showConfirm === true" class="col-xs-12" style="padding: 0;">
+              <div class="alert alert-danger clearfix" style="border-radius:0;margin-bottom:0;">
+                <div class="pull-left" style="line-height:30px;">
+                  <span class="glyphicon glyphicon-alert" aria-hidden="true" style="top: 2px;"></span>&nbsp;&nbsp;Are you sure you want to delete this spice?    
+                </div>
+                <div class="pull-right">
+                  <button ng-click="$ctrl.showConfirm = false" class="btn btn-default btn-sm">Cancel</button>
+                  <button ng-click="$ctrl.delete($ctrl.spice)" class="btn btn-danger btn-sm">Delete</button>  
+                </div>
+              </div>
+            </div>
+          </div>
+          <h2>{{::$ctrl.spice.name}}</h2>
+          <div class="clearfix">
+            <img ng-src="{{::$ctrl.spice.user.profileImageURL}}" class="pull-left" style="margin-right:10px;border-radius: 50%;width:32px;">
+            <div class="pull-left">
+              <strong>{{::$ctrl.spice.user.name}}</strong>
+              <div><small>{{::$ctrl.spice.timestamp | date:'short'}}</small></div>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 10px;">
+            <div class="col-xs-4">
+              <span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Prep (min)
+              <div style="color: #26B937;font-size: 24px;">{{::($ctrl.spice.prepTime) ? $ctrl.spice.prepTime : '-'}}</div>
+            </div>
+            <div class="col-xs-4">
+              <span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Cook (min)
+              <div style="color:#26B937; font-size: 24px;">{{::($ctrl.spice.cookTime) ? $ctrl.spice.cookTime : '-'}}</div>
+            </div>
+            <div class="col-xs-4">
+              <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="top: 2px;"></span> Servings
+              <div style="color:#26B937; font-size: 24px;">{{::($ctrl.spice.servings) ? $ctrl.spice.servings : '-'}}</div>
+            </div>
+          </div>
+          <div style="padding-bottom: 10px;padding-top: 10px;">{{::$ctrl.spice.description}}</div>
+        </div>
+        <div class="col-sm-6" style="padding:0">
+          <img style="width:100%;" ng-src="{{::$ctrl.spice.imageURL}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6" style="background: #ddd;padding: 15px;">
+          <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Ingredients</h3>
+          <div style="white-space: pre-wrap;">{{::$ctrl.spice.ingredients}}</div>
+        </div>
+        <div class="col-sm-6" style="background: #eee;padding: 15px;">
+          <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Directions</h3>
+          <div style="white-space: pre-wrap;">{{::$ctrl.spice.directions}}</div>
+        </div>
+      </div>
+    </div>

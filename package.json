@@ -1,0 +1,30 @@
+{
+  "name": "allspice",
+  "version": "1.0.0",
+  "description": "Recipe Manager using AngularJS/Firebase",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkavcar/AllSpice.git"
+  },
+  "keywords": [
+    "angularjs",
+    "firebase"
+  ],
+  "author": "Melik Kavcar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mkavcar/AllSpice/issues"
+  },
+  "homepage": "https://github.com/mkavcar/AllSpice#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "lodash": "^4.11.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

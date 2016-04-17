@@ -1,0 +1,37 @@
+body {
+  padding: 70px 20px 20px 20px;
+  background-color:#777;
+}
+
+/*Bootstrap overrides*/
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    color: white;
+    background: inherit;
+}
+
+.dropdown-menu>li>a {
+    color: #9d9d9d
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    background: #333;
+}
+
+.input-group-addon {
+    background:white;
+}
+
+.modal-header, .modal-footer {
+    border:0;
+}
+
+.modal-body {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+h2 {
+    margin-bottom: 20px;
+}

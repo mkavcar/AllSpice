@@ -1,0 +1,90 @@
+<form novalidate name="$ctrl.spiceForm">
+      <div class="container-fluid" style="max-width:1000px;background:#eee;">
+        
+        <!-- Header -->
+        <div class="row" style="background: #444;padding-left: 10px;">
+          <h2 style="color: #89E894;"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="top: 2px;"></span> {{ ($ctrl.isUpdate) ? 'Edit Spice' : 'Add Spice' }}</h2>
+        </div>
+        
+        <!-- Entry View -->
+        <div class="row" ng-show="$ctrl.showStatus !== true">
+          <div class="col-sm-6" style="padding-top: 15px;">
+            <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine }">
+              <label for="inputName">Name</label>
+              <input type="text" ng-model="$ctrl.spice.name" class="form-control" id="inputName" name="inputName" placeholder="Name" required>
+              <div ng-show="$ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine" ng-messages="$ctrl.spiceForm.inputName.$error" class="help-block" role="alert">
+                <div ng-message="required">This field is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputDescription">Description</label>
+              <textarea ng-model="$ctrl.spice.description" class="form-control" id="inputDescription"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="inputImageURL">Image URL</label>
+              <input type="text" ng-model="$ctrl.spice.imageURL" class="form-control" id="inputImageURL" placeholder="Image URL">
+            </div>
+            <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" style="width:100%;margin-bottom: 15px;">
+          </div>
+          <div class="col-sm-6" style="background: #ddd;padding-top: 15px;">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine }">
+                  <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Prep (min)</label>
+                  <input name="inputPrepTime" ng-model="$ctrl.spice.prepTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
+                  <div ng-show="$ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine" ng-messages="$ctrl.spiceForm.inputPrepTime.$error" class="help-block" role="alert">
+                    <div ng-message="required">Please enter 1-999</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine }">
+                  <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Cook (min)</label>
+                  <input name="inputCookTime" ng-model="$ctrl.spice.cookTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
+                  <div ng-show="$ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine" ng-messages="$ctrl.spiceForm.inputCookTime.$error" class="help-block" role="alert">
+                    <div ng-message="required">Please enter 1-999</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine }">
+                  <label><span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="top: 2px;"></span> Servings</label>
+                  <input name="inputServings" ng-model="$ctrl.spice.servings" class="form-control" type="number" min="1" max="99" ng-maxlength="2">
+                  <div ng-show="$ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine" ng-messages="$ctrl.spiceForm.inputServings.$error" class="help-block" role="alert">
+                    <div ng-message="required">Please enter 1-99</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputIngredients">Ingredients</label>
+              <textarea ng-model="$ctrl.spice.ingredients" rows="4" class="form-control" id="inputIngredients"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="inputDirections">Directions</label>
+              <textarea ng-model="$ctrl.spice.directions" rows="4" class="form-control" id="inputDirections"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="$ctrl.showStatus !== true">
+          <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
+            <button type="button" class="btn btn-success pull-right" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Submit</button>
+          </div>
+        </div>
+        
+        <!-- Status View -->
+        <div class="row" ng-show="$ctrl.showStatus === true">
+          <div class="col-xs-12" style="padding-top: 20px;">
+            <div class="alert alert-success" role="alert" style="font-size: 18px;line-height: 34px;">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true" style="top: 2px;"></span> Spice submitted successfully!                        
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="$ctrl.showStatus === true">
+          <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
+            <button class="btn btn-success pull-right" ng-click="$ctrl.ok()">OK</button>
+          </div>
+        </div>
+        
+      </div>
+    </form>

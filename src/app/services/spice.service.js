@@ -3,14 +3,13 @@ angular
   .module('allSpiceApp')
   .factory('spiceApi', spiceApi);
 
-spiceApi.$inject = ['$firebaseArray', 'authService'];
+spiceApi.$inject = ['$firebaseArray', '$firebaseRef', 'authService'];
 
-function spiceApi($firebaseArray, authService) {
+function spiceApi($firebaseArray, $firebaseRef, authService) {
   var 
   _spiceObj = null,
       timestamp = new Date(),
-      ref = new Firebase("https://amber-heat-8766.firebaseio.com"),
-      arr = $firebaseArray(ref),
+      arr = $firebaseArray($firebaseRef.default),
       tagList,
       spiceApi = {
         getAll: getAll,

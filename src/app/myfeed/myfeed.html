@@ -3,7 +3,7 @@
         <div class="input-group-addon">
             <span style="color:#89E894" class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </div>
-        <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control" placeholder="Search" style="border-left:0;"></input>
+        <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control" placeholder="Search" style="border-left:0;-webkit-box-shadow:none;box-shadow:none;"></input>
     </div>
 </div>
 <sa-spice-card ng-repeat="spice in $ctrl.spices | orderBy:'-$id' | filter: $ctrl.filter" spice="spice"></sa-spice-card>

@@ -6,8 +6,9 @@ angular
   .config(config)
   .value('$routerRootComponent', 'app');
 
-config.$inject = ['$locationProvider'];
+config.$inject = ['$locationProvider', '$firebaseRefProvider'];
 
-function config($locationProvider) {
+function config($locationProvider, $firebaseRefProvider) {
     $locationProvider.html5Mode(true);
+    $firebaseRefProvider.registerUrl('https://amber-heat-8766.firebaseio.com');
 }

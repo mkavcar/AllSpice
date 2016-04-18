@@ -11,6 +11,7 @@ function spiceApi($firebaseArray, authService) {
       timestamp = new Date(),
       ref = new Firebase("https://amber-heat-8766.firebaseio.com"),
       arr = $firebaseArray(ref),
+      tagList,
       spiceApi = {
         getAll: getAll,
         getObj: getObj,
@@ -18,7 +19,8 @@ function spiceApi($firebaseArray, authService) {
         add: add,
         update: update,
         remove: remove,
-        togglePin: togglePin
+        togglePin: togglePin,
+        getTagList: getTagList
       };      
 
   return spiceApi;
@@ -72,5 +74,12 @@ function spiceApi($firebaseArray, authService) {
       spiceObj.pinnedUsers[user.uid] = !(spiceObj.pinnedUsers[user.uid] === true);       
       spiceApi.update(spiceObj);
     }
+  };
+  
+  function getTagList() {
+    if (!tagList)
+      tagList = [{ 'text': 'appetizer' }, { 'text': 'dessert' }];
+    
+    return tagList;
   };
 };

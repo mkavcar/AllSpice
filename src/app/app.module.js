@@ -2,7 +2,7 @@
 
 //app.module.js
 angular
-  .module('allSpiceApp', ['ngComponentRouter', 'firebase'])
+  .module('allSpiceApp', ['ngComponentRouter', 'firebase', 'ngTagsInput'])
   .config(config)
   .value('$routerRootComponent', 'app');
 

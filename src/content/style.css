@@ -1,9 +1,13 @@
 body {
-  padding: 70px 20px 20px 20px;
+  padding: 50px 0px 0px 0px;
   background-color:#777;
 }
 
 /*Bootstrap overrides*/
+a {
+    color:black;
+}
+
 .dropdown-menu>li>a:focus,
 .dropdown-menu>li>a:hover {
     color: white;
@@ -34,4 +38,17 @@ body {
 
 h2 {
     margin-bottom: 20px;
+}
+
+/* ng-tag-input overrides */
+tags-input .tags .tag-item {
+    background: #f0ad4e;
+    border: 1px solid #eea236;
+}
+
+/* media queries */
+@media (min-width: 768px) {  
+    body {
+        padding: 70px 20px 20px 20px;
+    }    
 }

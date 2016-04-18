@@ -5,5 +5,22 @@
     "firebase.json",
     "**/.*",
     "**/node_modules/**"
-  ]
+  ],
+  "redirects": [ {
+    "source" : "/MyFeed",
+    "destination" : "/",
+    "type" : 301
+  }, {
+    "source" : "/AddSpice",
+    "destination" : "/",
+    "type" : 301
+  }, {
+    "source" : "/myFeed",
+    "destination" : "/",
+    "type" : 301
+  }, {
+    "source" : "/addSpice",
+    "destination" : "/",
+    "type" : 301
+  } ]
 }

@@ -22,7 +22,19 @@ function MyFeedController(spiceApi, $rootRouter, $rootScope, authService) {
     if ($rootScope.search) {
       var search = $rootScope.search.toLowerCase();
 
-      res = (item.name.toLowerCase().indexOf(search) >= 0 || item.user.name.toLowerCase().indexOf(search) >= 0 || item.description.toLowerCase().indexOf(search) >= 0 || item.ingredients.toLowerCase().indexOf(search) >= 0) || item.directions.toLowerCase().indexOf(search) >= 0;
+      res = (item.name.toLowerCase().indexOf(search) >= 0 || item.user.name.toLowerCase().indexOf(search) >= 0)
+      
+      if (!res && item.description)
+        res = (item.description.toLowerCase().indexOf(search) >= 0);
+      
+      if (!res && item.ingredients)
+        res = (item.ingredients.toLowerCase().indexOf(search) >= 0);
+         
+      if (!res && item.directions) 
+        res = (item.directions.toLowerCase().indexOf(search) >= 0);
+        
+      if (!res && item.tags)
+        res = (item.tags.toLowerCase().indexOf(search) >= 0);
     }
 
     return res;

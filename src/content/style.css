@@ -40,6 +40,15 @@ h2 {
     margin-bottom: 20px;
 }
 
+.search-input {
+    border-left:0;
+}
+.search-input:focus {
+    border-color: #ccc; 
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 /* ng-tag-input overrides */
 tags-input .tags .tag-item {
     background: #f0ad4e;

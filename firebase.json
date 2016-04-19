@@ -1,6 +1,6 @@
 {
   "firebase": "amber-heat-8766",
-  "public": "src",
+  "public": "dist",
   "ignore": [
     "firebase.json",
     "**/.*",

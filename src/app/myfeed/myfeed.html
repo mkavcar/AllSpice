@@ -6,4 +6,4 @@
         <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control search-input" placeholder="Search" style="-webkit-box-shadow:none;box-shadow:none;"></input>
     </div>
 </div>
-<sa-spice-card ng-repeat="spice in $ctrl.spices | orderBy:'-$id' | filter: $ctrl.filter" spice="spice"></sa-spice-card>
+<sa-spice-card ng-repeat="spice in $ctrl.spices | orderBy:'-timestamp' | filter: $ctrl.filter" spice="spice"></sa-spice-card>

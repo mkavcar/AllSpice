@@ -9,7 +9,7 @@ function spiceApi($firebaseArray, $firebaseRef, authService) {
   var 
   _spiceObj = null,
       timestamp = new Date(),
-      arr = $firebaseArray($firebaseRef.default),
+      arr = $firebaseArray($firebaseRef.spices),
       tagList,
       spiceApi = {
         getAll: getAll,
@@ -76,9 +76,17 @@ function spiceApi($firebaseArray, $firebaseRef, authService) {
   };
   
   function getTagList() {
-    if (!tagList)
-      tagList = [{ 'text': 'appetizer' }, { 'text': 'dessert' }];
-    
-    return tagList;
+    /*return $firebaseRef.tags.once('value').then(function (data) {
+      return Object.keys(data).map(function (item) {
+        return { "text": item };
+      });
+      
+      //if (!tagList) {
+      //  tagList = ;
+      //}
+      
+      //return tagList;
+    });*/
+    return [{ 'text': 'appetizer' }, { 'text': 'dessert' }];
   };
 };

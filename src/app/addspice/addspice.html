@@ -67,7 +67,7 @@
             <div class="form-group" style="margin-bottom:0;padding-bottom:15px;">
               <label for="inputTags">Tags</label>
               <tags-input ng-model="$ctrl.tags" max-tags="20" add-on-space="true">
-                <auto-complete source="$ctrl.getTagList($query)" min-length="2" max-results-to-show="6"></auto-complete>
+                <auto-complete source="$ctrl.filterTagList($query)" min-length="2" max-results-to-show="6"></auto-complete>
               </tags-input>
             </div>
           </div>

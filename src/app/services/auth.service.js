@@ -3,12 +3,12 @@ angular
   .module('allSpiceApp')
   .factory("authService", authService);
 
-authService.$inject = ["$firebaseAuth", '$firebaseRef', "$q"];
+authService.$inject = ["$firebaseAuthService", "$q"];
 
-function authService ($firebaseAuth, $firebaseRef, $q) {
+function authService ($firebaseAuthService, $q) {
     var
       authData = null,
-      authObj = $firebaseAuth($firebaseRef.default),
+      authObj = $firebaseAuthService,
       authService = {
         isLoggedIn: isLoggedIn,
         getUser: getUser,

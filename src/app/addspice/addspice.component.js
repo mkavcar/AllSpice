@@ -6,16 +6,11 @@ angular
     templateUrl: 'app/addspice/addspice.html'
 });
 
-AddSpiceController.$inject = ['$firebaseArray', 'spiceApi', '$timeout'];
+AddSpiceController.$inject = ['$firebaseArray', 'spiceApi'];
 
-function AddSpiceController($firebaseArray, spiceApi, $timeout) {
+function AddSpiceController($firebaseArray, spiceApi) {
   var 
-    ctrl = this,
-    tagList = spiceApi.getTagList();
-  
-  ctrl.spice = spiceApi.getObj();
-  ctrl.tags = initTags();
-  ctrl.isUpdate = (ctrl.spice);
+    ctrl = this;
   
   ctrl.add = function() {
     if (angular.isArray(ctrl.tags)) {
@@ -39,7 +34,17 @@ function AddSpiceController($firebaseArray, spiceApi, $timeout) {
     return false;
   };
   
-  ctrl.getTagList = function(query) {
+  ctrl.$routerOnActivate = function () {
+    ctrl.spice = spiceApi.getObj();
+    ctrl.tags = initTags();
+    ctrl.isUpdate = (ctrl.spice);
+    
+    spiceApi.getTagList().then(function(data){
+      tagList = data;
+    });
+  };
+  
+  ctrl.filterTagList = function(query) {
     if (angular.isArray(tagList)) {
       return tagList.filter(function(item){
         return item.text.toLowerCase().indexOf(query.toLowerCase()) === 0;

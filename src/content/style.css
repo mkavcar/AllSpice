@@ -3,6 +3,11 @@ body {
   background-color:#777;
 }
 
+.nodata {
+    margin:10px;
+    padding:20px;    
+}
+
 /*Bootstrap overrides*/
 a {
     color:black;
@@ -62,4 +67,10 @@ tags-input .tags .tag-item {
     body {
         padding: 70px 20px 20px 20px;
     }    
+    
+    .nodata {
+        margin-right: auto;
+        margin-left: auto;
+        max-width:1000px;
+    }
 }

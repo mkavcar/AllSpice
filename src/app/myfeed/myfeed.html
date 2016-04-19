@@ -7,6 +7,6 @@
     </div>
 </div>
 <sa-spice-card ng-repeat="spice in $ctrl.spices | orderBy:'-timestamp' | filter: $ctrl.filter as filteredSpices track by spice.$id" spice="spice"></sa-spice-card>
-<div ng-if="filteredSpices.length === 0" class="alert alert-danger nodata">
+<div ng-if="$ctrl.loadComplete && filteredSpices.length === 0" class="alert alert-danger nodata">
   <h4><span class="glyphicon glyphicon-grain" style="font-size: 1.5em;"></span> No spice found</h4>
 </div>

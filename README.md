@@ -10,3 +10,4 @@ Web recipe agregator sample app using AngularJS/Firebase
 - Bootstrap 3.3.6
 - Firebase/AngularFire 1.2
 
+![screenshot_mobile](https://dl.dropboxusercontent.com/u/274769/allspice_screen_mobile.jpg)

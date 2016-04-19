@@ -1,7 +1,5 @@
 <div class="container-fluid" style="max-width:1000px;margin-bottom:15px;background:#ccc">
-      <div class="row" style="background:white;">
-        <div class="col-sm-6">
-          <div class="row" ng-show="$root.auth.isLoggedIn()">
+      <div class="row" ng-show="$root.auth.isLoggedIn()">
             <div ng-show="$ctrl.showConfirm !== true" class="col-xs-12" style="background:#89E894;padding-bottom:10px;padding-top:10px;">
               <button ng-hide="$root.auth.getUser().uid === $ctrl.spice.user.uid"  ng-click="$ctrl.togglePin($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-heart" aria-hidden="true" style="top: 2px;" title="Pin\Unpin to My Feed"></span> {{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'Unpin' : 'Pin' }}</button>
               <button ng-show="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.edit($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="top: 2px;"></span> Edit</button>
@@ -19,6 +17,8 @@
               </div>
             </div>
           </div>
+      <div class="row" style="background:white;">
+        <div class="col-sm-6">
           <h2>{{::$ctrl.spice.name}}</h2>
           <div class="clearfix" style="padding-bottom: 10px;">
             <img ng-src="{{::$ctrl.spice.user.profileImageURL}}" class="pull-left" style="margin-right:10px;border-radius: 50%;width:32px;">

@@ -54,6 +54,9 @@ function MyFeedController(spiceApi, $rootRouter, $rootScope, authService) {
       $rootScope.activeRoute = 'MyFeed';
     }
 
-    ctrl.spices = spiceApi.getAll();
+    spiceApi.getAll().$loaded(function(data) {
+      ctrl.spices = data;
+      ctrl.loadComplete = true;
+    });
   };
 };

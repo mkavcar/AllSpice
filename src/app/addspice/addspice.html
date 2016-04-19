@@ -64,7 +64,7 @@
               <label for="inputDirections">Directions</label>
               <textarea ng-model="$ctrl.spice.directions" rows="4" class="form-control" id="inputDirections"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:0;padding-bottom:15px;">
               <label for="inputTags">Tags</label>
               <tags-input ng-model="$ctrl.tags" max-tags="20" add-on-space="true">
                 <auto-complete source="$ctrl.getTagList($query)" min-length="2" max-results-to-show="6"></auto-complete>

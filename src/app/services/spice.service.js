@@ -3,24 +3,25 @@ angular
   .module('allSpiceApp')
   .factory('spiceApi', spiceApi);
 
-spiceApi.$inject = ['$firebaseArray', '$firebaseRef', 'authService'];
+spiceApi.$inject = ['$firebaseArray', '$firebaseRef', '$q', 'authService'];
 
-function spiceApi($firebaseArray, $firebaseRef, authService) {
+function spiceApi($firebaseArray, $firebaseRef, $q, authService) {
   var 
-  _spiceObj = null,
-      timestamp = new Date(),
-      arr = $firebaseArray($firebaseRef.spices),
-      tagList,
-      spiceApi = {
-        getAll: getAll,
-        getObj: getObj,
-        setObj: setObj,
-        add: add,
-        update: update,
-        remove: remove,
-        togglePin: togglePin,
-        getTagList: getTagList
-      };      
+    _spiceObj = null,
+    timestamp = new Date(),
+    arr = $firebaseArray($firebaseRef.spices),
+    tagRef = $firebaseRef.tags,
+    tagList,
+    spiceApi = {
+      getAll: getAll,
+      getObj: getObj,
+      setObj: setObj,
+      add: add,
+      update: update,
+      remove: remove,
+      togglePin: togglePin,
+      getTagList: getTagList
+    };
 
   return spiceApi;
   ////////////
@@ -76,17 +77,19 @@ function spiceApi($firebaseArray, $firebaseRef, authService) {
   };
   
   function getTagList() {
-    /*return $firebaseRef.tags.once('value').then(function (data) {
-      return Object.keys(data).map(function (item) {
-        return { "text": item };
+    if (!tagList) {
+      return tagRef.once('value').then(function (data) {
+        tagList = Object.keys(data.val()).map(function (item) {
+          return { "text": item };
+        }); 
+        
+        return tagList;
       });
-      
-      //if (!tagList) {
-      //  tagList = ;
-      //}
-      
-      //return tagList;
-    });*/
-    return [{ 'text': 'appetizer' }, { 'text': 'dessert' }];
+    }
+    else {
+      var deferred = $q.defer();
+      deferred.resolve(tagList);
+      return deferred.promise;
+    }
   };
 };

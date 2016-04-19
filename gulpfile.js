@@ -7,51 +7,71 @@ var gulp = require('gulp'),
 	watch = require('gulp-watch'),
 	sequence = require('gulp-watch-sequence'),
     del = require('del'),
-    angularTemplates = require('gulp-angular-templates');
+    angularTemplatecache = require('gulp-angular-templatecache'),
+    htmlmin = require('gulp-htmlmin');
 
-
-var paths = {
-	js: [
-        'src/app/app.module.js',
-		'src/app/**/*.js'
+// Path settings for Gulp
+var clientApp = './src/app/';
+var config = {
+    html: clientApp + '**/*.html',
+    js: [
+        clientApp + 'app.module.js',
+		clientApp + '**/*.js'
 	],
-    html: [
-		'src/**/*.html',
-        '!src/index.html'
-	],
-	css: [
-		'src/content/*.css'
-	]	
-}
-
-//clean dist folder`
-gulp.task('clean', function () {
-  return del(['dist/**/*']);
-});
-
-//
-gulp.task('html', function () {
-    return gulp.src(paths.html)
-        .pipe(angularTemplates({ module: 'allSpiceApp'}))
-        .pipe(gulp.src(paths.js), {
-            passthrough: true,
+    css: './src/content/*.css',
+    templateCache: {
+        file: 'templates.js',
+        options: {
+            module: 'allSpiceApp',
             root: 'app/',
-            standAlone: false})
-        .pipe(concat('app.js'))
-		//.pipe(uglify())
-        .pipe(gulp.dest('dist/'));
-});
-
+            standAlone: false
+        }
+    },
+    output: 'app.js',
+    dest: './dist/'
+};
 
 //bundle & minify JS 
 gulp.task('js', function() {
-	gulp.src(paths.js)
-		.pipe(concat('app.js'))
+	gulp.src(config.js)
+		.pipe(concat(config.output))
 		.pipe(uglify())
-		.pipe(gulp.dest('dist/'));
+		.pipe(gulp.dest(config.dest));
+});
+
+//create angular template cache
+gulp.task('templatecache', function() {
+    return gulp
+        .src(config.html)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(angularTemplatecache(
+            config.templateCache.file,
+            config.templateCache.options
+        ))
+        .pipe(gulp.dest(config.dest));
+});
+
+//merge app.js with templates.js
+gulp.task('merge', function() {
+    return gulp
+        .src([config.dest + config.output, config.dest + config.templateCache.file])
+        .pipe(concat(config.output))
+        .pipe(gulp.dest(config.dest));
+});
+
+//delete templates.js
+gulp.task('clean', function () {
+  return del(config.dest + config.templateCache.file);
+});
+
+//css
+gulp.task('css', function() {
+   gulp.src(config.css)
+    .pipe(minifyCSS()) 
+    .pipe(gulp.dest('dist/'));
 });
 
 
 //execute
 gulp.task('default', 
-    gulpSequence('clean', 'js'));
+    gulpSequence('js', 'templatecache', 'merge', 'css', 'clean'));

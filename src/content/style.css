@@ -42,6 +42,7 @@ h2 {
 
 .search-input {
     border-left:0;
+    padding-left:0;
 }
 .search-input:focus {
     border-color: #ccc; 

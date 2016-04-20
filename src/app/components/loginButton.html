@@ -1,15 +1,12 @@
-<div ng-hide="$ctrl.isLoggedIn()" class="navbar-form navbar-right">
-      <button class="btn btn-success" ng-click="$ctrl.login()"><span style="top: 2px;" class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</button>
-    </div>
+<button ng-if="!$ctrl.isLoggedIn()" class="btn btn-success"" ng-click="$ctrl.login()"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</button>
 
-    <ul ng-show="$ctrl.isLoggedIn()" class="nav navbar-nav navbar-right" style="border-left:1px solid #89E894;">
-      <li>
-        <a href="#" style="padding-top: 10px;padding-bottom: 8px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img style="height:32px;margin-right: 10px;border-radius: 50%;" ng-src="{{$ctrl.authData.google.profileImageURL}}">{{ $ctrl.authData.google.displayName }}&nbsp;&nbsp;<span style="color:#89E894;top: 2px;" class="glyphicon glyphicon-chevron-down"
-            aria-hidden="true"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>
-        </ul>
-      </li>
+<ul ng-if="$ctrl.isLoggedIn()" class="userDropdown">
+  <li>
+    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img ng-src="{{$ctrl.authData.google.profileImageURL}}">{{ $ctrl.authData.google.displayName }}&nbsp;&nbsp;<span style="color:#89E894;" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>
     </ul>
+  </li>
+</ul>

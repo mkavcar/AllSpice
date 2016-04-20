@@ -1,5 +1,7 @@
 <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
+        <sa-login-button class="pull-right" style="margin-top:8px;"></sa-login-button>
+        
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -17,8 +19,6 @@
             <li ng-show="$root.auth.isLoggedIn()" ng-class="{'active' : $root.activeRoute === 'MySpice'}"><a ng-link="['MyFeed', {state: 'mySpice'}]">My Spice</a></li>
           </ul>
 
-          <sa-login-button></sa-login-button>
-
           <ul ng-show="$root.auth.isLoggedIn()" class="nav navbar-nav navbar-right" style="margin-right:0px;">
             <li ng-class="{'active' : $root.activeRoute === 'AddSpice'}"><a href="#" ng-click="$ctrl.openAddSpice()"><span style="color:#89E894" class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Spice</a></li>
           </ul>
@@ -29,7 +29,7 @@
                 <div class="input-group-addon">
                   <span style="color:#89E894" class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </div>
-                <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control search-input" placeholder="Search" style="width:155px"></input>
+                <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control search-input" placeholder="Search"></input>
               </div>
             </div>
 

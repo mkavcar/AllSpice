@@ -94,6 +94,7 @@ h2 {
 }
 
 .search-input {
+    width:155px;
     border-left:0;
     padding-left:0;
     -webkit-appearance:none;

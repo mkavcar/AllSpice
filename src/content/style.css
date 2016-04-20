@@ -64,6 +64,10 @@ body {
     border-radius: 50%;
 }
 
+/* Animations */
+.animate-hide-flipOutX.ng-leave { animation:0.5s flipOutX ease; }
+.animate-show-flipInX.ng-enter { animation:0.5s flipInX ease; }
+
 /*Bootstrap overrides*/
 a {
     color:black;

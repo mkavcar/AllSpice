@@ -3,9 +3,37 @@ body {
   background-color:#777;
 }
 
-.nodata {
-    margin:10px;
-    padding:20px;    
+.app-alert {
+    padding:40px 20px;
+    color: #222222;
+    background-color: white;
+    border-left: 8px solid transparent;    
+}
+
+.app-alert-warning {
+    border-color:#EFD362
+}
+
+.app-alert-success {
+    border-color: #4BC74D;
+}
+
+.app-alert .glyphicon { 
+    font-size: 1.5em;
+    top: 6px;
+    padding-right: 10px;
+}
+
+.app-alert h4 {
+    margin-bottom:0;
+}
+
+.app-alert-warning .glyphicon {
+    color: #EFD362;
+}
+
+.app-alert-success .glyphicon {
+    color: #4BC74D;
 }
 
 /*Bootstrap overrides*/
@@ -32,17 +60,10 @@ a {
     background:white;
 }
 
-.modal-header, .modal-footer {
-    border:0;
-}
-
-.modal-body {
-    padding-bottom: 0;
-    padding-top: 0;
-}
-
 h2 {
-    margin-bottom: 20px;
+    padding-top:20px;
+    padding-bottom: 20px;
+    margin:0;
 }
 
 .search-input {
@@ -68,9 +89,8 @@ tags-input .tags .tag-item {
         padding: 70px 20px 20px 20px;
     }    
     
-    .nodata {
-        margin-right: auto;
-        margin-left: auto;
+    .app-alert {        
+        margin:10px auto;
         max-width:1000px;
     }
 }

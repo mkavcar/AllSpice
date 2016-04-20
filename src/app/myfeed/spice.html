@@ -1,14 +1,14 @@
 <div class="container-fluid" style="max-width:1000px;margin-bottom:15px;background:#ccc">
-      <div class="row" ng-show="$root.auth.isLoggedIn()">
-            <div ng-show="$ctrl.showConfirm !== true" class="col-xs-12" style="background:#89E894;padding-bottom:10px;padding-top:10px;">
+      <div class="row" ng-if="$root.auth.isLoggedIn()">
+            <div ng-if="$ctrl.showConfirm !== true" class="col-xs-12" style="background:#89E894;padding-bottom:10px;padding-top:10px;">
               <button ng-hide="$root.auth.getUser().uid === $ctrl.spice.user.uid"  ng-click="$ctrl.togglePin($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-heart" aria-hidden="true" style="top: 2px;" title="Pin\Unpin to My Feed"></span> {{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'Unpin' : 'Pin' }}</button>
-              <button ng-show="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.edit($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="top: 2px;"></span> Edit</button>
-              <button ng-show="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.showConfirm = true" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="top: 2px;"></span> Delete</button>
+              <button ng-if="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.edit($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="top: 2px;"></span> Edit</button>
+              <button ng-if="$root.auth.getUser().uid === $ctrl.spice.user.uid" ng-click="$ctrl.showConfirm = true" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="top: 2px;"></span> Delete</button>
             </div>
-            <div ng-show="$ctrl.showConfirm === true" class="col-xs-12" style="padding: 0;">
-              <div class="alert alert-danger clearfix" style="border-radius:0;margin-bottom:0;">
+            <div ng-if="$ctrl.showConfirm === true" class="col-xs-12" style="padding: 0;">
+              <div class="alert alert-danger clearfix" style="border-radius:0;margin-bottom:0;padding: 9px 15px;">
                 <div class="pull-left" style="line-height:30px;">
-                  <span class="glyphicon glyphicon-alert" aria-hidden="true" style="top: 2px;"></span>&nbsp;&nbsp;Are you sure you want to delete this spice?    
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="font-size: 1.4em;top: 6px;padding-right: 10px;"></span>Are you sure you want to delete this spice?    
                 </div>
                 <div class="pull-right">
                   <button ng-click="$ctrl.showConfirm = false" class="btn btn-default btn-sm">Cancel</button>
@@ -17,8 +17,8 @@
               </div>
             </div>
           </div>
-      <div class="row" style="background:white;">
-        <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-6" style="background:white;">
           <h2>{{::$ctrl.spice.name}}</h2>
           <div class="clearfix" style="padding-bottom: 10px;">
             <img ng-src="{{::$ctrl.spice.user.profileImageURL}}" class="pull-left" style="margin-right:10px;border-radius: 50%;width:32px;">
@@ -43,7 +43,7 @@
           </div>
           <div style="padding-bottom: 10px;">{{::$ctrl.spice.description}}</div>
           <div ng-show="$ctrl.spice.tags" style="padding-bottom: 10px;">
-            <button class="btn btn-warning btn-xs" ng-repeat="tag in $ctrl.spice.tags.split(',')" ng-click="$root.search = tag" style="margin-right:4px;">{{ ::tag }}</button>
+            <button class="btn btn-warning btn-xs" ng-repeat="tag in ::$ctrl.spice.tags.split(',')" ng-click="$root.search = tag" style="margin-right:4px;">{{ ::tag }}</button>
           </div>
         </div>
         <div class="col-sm-6" style="padding:0">

@@ -48,7 +48,7 @@ function authService ($firebaseAuthService, $q) {
     };
 
     function logout(){
-      ref.unauth();
+      authObj.$unauth();
       authData = null;
     };
   };

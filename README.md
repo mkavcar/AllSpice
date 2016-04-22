@@ -1,8 +1,8 @@
 # AllSpice
 Web recipe agregator sample app using AngularJS/Firebase [Demo URL](https://amber-heat-8766.firebaseapp.com/)
 
-<img src="https://dl.dropboxusercontent.com/u/274769/allspice_screen_mobile.jpg" width="30%">
-<img src="https://dl.dropboxusercontent.com/u/274769/allspice_screen.jpg" width="65%">
+<img src="https://dl.dropboxusercontent.com/u/274769/allspice_screen_mobile.jpg" width="23.4%">
+<img src="https://dl.dropboxusercontent.com/u/274769/allspice_screen.jpg" width="75.7%">
 
 **Used libraries:**
 - Angular 1.5.3

@@ -3,26 +3,30 @@ angular
   .module('allSpiceApp')
   .component("saLoginButton", {
     controller: LoginButtonController,
-    templateUrl: 'app/components/loginbutton.html'
+    templateUrl: 'app/components/loginButton.html'
 });
 
 LoginButtonController.$inject = ['authService'];
 
 function LoginButtonController(authService) {
   var ctrl = this;    
-
-  ctrl.isLoggedIn = function() {
+  ctrl.isLoggedIn = isLoggedIn;
+  ctrl.login = login;
+  ctrl.logout = logout;
+  
+  ////////////
+  function isLoggedIn() {
     return authService.isLoggedIn();
-  };
+  }
 
-  ctrl.login = function() {
+  function login() {
     authService.login().then(function (authData) {
       ctrl.authData = authData;
       console.log(ctrl.authData);
     });
-  };
+  }
 
-  ctrl.logout = function() {
+  function logout() {
     authService.logout();
-  };
+  }
 };

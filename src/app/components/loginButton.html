@@ -3,7 +3,7 @@
 <ul ng-if="$ctrl.isLoggedIn()" class="userDropdown">
   <li>
     <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <img ng-src="{{$ctrl.authData.google.profileImageURL}}">{{ $ctrl.authData.google.displayName }}&nbsp;&nbsp;<span style="color:#89E894;" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+      <img ng-src="{{$ctrl.authData.google.profileImageURL}}"><span class="hidden-xs">{{ $ctrl.authData.google.displayName }}&nbsp;&nbsp;</span><span style="color:#89E894;" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
     </a>
     <ul class="dropdown-menu">
       <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>

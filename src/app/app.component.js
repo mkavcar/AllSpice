@@ -14,15 +14,16 @@ AppController.$inject = ['$rootScope', '$rootRouter', 'authService', 'spiceApi']
 
 function AppController($rootScope, $rootRouter, authService, spiceApi) {
   var ctrl = this;
-
+  ctrl.openAddSpice = openAddSpice;
   $rootScope.auth = authService;
   $rootScope.activeRoute = 'MyFeed';
 
-  ctrl.openAddSpice = function() {
+  ////////////
+  function openAddSpice() {
     spiceApi.setObj(null);
     $rootScope.activeRoute = 'AddSpice';
     $rootRouter.navigate(['AddSpice']);
-  };
+  }
 
   //$rootRouter.navigate(['MyFeed']);
 };

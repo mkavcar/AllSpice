@@ -24,10 +24,6 @@ body {
     padding-right: 10px;
 }
 
-.app-alert h4 {
-    margin-bottom:0;
-}
-
 .app-alert-warning .glyphicon {
     color: #EFD362;
 }
@@ -65,8 +61,10 @@ body {
 }
 
 /* Animations */
-.animate-hide-flipOutX.ng-leave { animation:0.5s flipOutX ease; }
-.animate-show-flipInX.ng-enter { animation:0.5s flipInX ease; }
+.animate-hide-flipOutX.ng-leave { animation:1s flipOutX ease; }
+.animate-show-flipInX.ng-enter { animation:1s flipInX ease; }
+.ng-hide-add { animation:0.5s lightSpeedOut ease; }
+.ng-hide-remove { animation:0.5s flipInX ease; }
 
 /*Bootstrap overrides*/
 a {
@@ -117,8 +115,12 @@ h2 {
 
 .navbar-toggle {
     margin-right:0;
-    margin-left:15px;
+    margin-left:10px;
     float:left;
+}
+
+.navbar-brand {
+    padding-left: 5px;
 }
 
 /* ng-tag-input overrides */
@@ -136,5 +138,13 @@ tags-input .tags .tag-item {
     .app-alert {        
         margin:10px auto;
         max-width:1000px;
+    }
+    
+    /* Animations */
+    .animate-hide-flipOutX.ng-leave { animation:0.5s flipOutX ease; }
+    .animate-show-flipInX.ng-enter { animation:0.5s flipInX ease; }
+
+    .navbar-brand {
+        padding-left: 15px;
     }
 }

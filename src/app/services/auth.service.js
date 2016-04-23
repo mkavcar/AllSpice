@@ -6,19 +6,18 @@ angular
 authService.$inject = ["$firebaseAuthService", "$q"];
 
 function authService ($firebaseAuthService, $q) {
-    var
-      authData = null,
-      authObj = $firebaseAuthService,
-      authService = {
-        isLoggedIn: isLoggedIn,
-        getUser: getUser,
-        login: login,
-        logout: logout  
-      };
+    var authData = null,
+        authObj = $firebaseAuthService,
+        authService = {
+          isLoggedIn: isLoggedIn,
+          getUser: getUser,
+          login: login,
+          logout: logout  
+        };
   
     return authService;
-    ////////////
-  
+    
+    ////////////  
     function isLoggedIn(){
       return authData !== null;
     };

@@ -9,10 +9,15 @@ angular
 AddSpiceController.$inject = ['$firebaseArray', 'spiceApi'];
 
 function AddSpiceController($firebaseArray, spiceApi) {
-  var 
-    ctrl = this;
+  var ctrl = this;
+  ctrl.add = add;
+  ctrl.$routerCanReuse = routerCanReuse;
+  ctrl.$routerOnActivate = routerOnActivate;
+  ctrl.filterTagList = filterTagList;
+  ctrl.ok = ok;
   
-  ctrl.add = function() {
+  ////////////
+  function add() {
     if (angular.isArray(ctrl.tags)) {
       ctrl.spice.tags = ctrl.tags.map(function(item) {
         return item.text;
@@ -28,13 +33,13 @@ function AddSpiceController($firebaseArray, spiceApi) {
     ctrl.tags = null;
     ctrl.spiceForm.$setPristine();
     ctrl.showStatus = true;      
-  };
+  }
 
-  ctrl.$routerCanReuse = function() {
+  function routerCanReuse() {
     return false;
-  };
+  }
   
-  ctrl.$routerOnActivate = function () {
+  function routerOnActivate() {
     ctrl.spice = spiceApi.getObj();
     ctrl.tags = initTags();
     ctrl.isUpdate = (ctrl.spice);
@@ -42,9 +47,9 @@ function AddSpiceController($firebaseArray, spiceApi) {
     spiceApi.getTagList().then(function(data){
       tagList = data;
     });
-  };
+  }
   
-  ctrl.filterTagList = function(query) {
+  function filterTagList(query) {
     if (angular.isArray(tagList)) {
       return tagList.filter(function(item){
         return item.text.toLowerCase().indexOf(query.toLowerCase()) === 0;
@@ -52,12 +57,12 @@ function AddSpiceController($firebaseArray, spiceApi) {
     }
     
     return null;  
-  };
+  }  
   
-  ctrl.ok = function() {
+  function ok() {
     ctrl.showStatus = false;
     ctrl.isUpdate = false;
-  };
+  }
   
   function initTags() {
     if (ctrl.spice && ctrl.spice.tags) {

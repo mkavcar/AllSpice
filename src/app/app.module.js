@@ -2,7 +2,7 @@
 
 //app.module.js
 angular
-  .module('allSpiceApp', ['ngComponentRouter', 'firebase', 'ngTagsInput'])
+  .module('allSpiceApp', ['ngComponentRouter', 'firebase', 'ngTagsInput', 'ngAnimate'])
   .constant('FirebaseUrl', 'https://amber-heat-8766.firebaseio.com')
   .config(config)
   .value('$routerRootComponent', 'app');

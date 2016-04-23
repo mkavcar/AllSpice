@@ -9,38 +9,18 @@ angular
 MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService'];
   
 function MyFeedController(spiceApi, $rootRouter, $rootScope, authService) {
-  var 
-    ctrl = this,
-    uid = null;    
+  var ctrl = this,
+      uid = null;    
 
-  ctrl.filter = function(item) {
-    var res = true;
-
-    if (uid)
-      res = ((item.user && item.user.uid === uid) || (item.pinnedUsers && item.pinnedUsers[uid] === true));
-
-    if ($rootScope.search) {
-      var search = $rootScope.search.toLowerCase();
-
-      res = (item.name.toLowerCase().indexOf(search) >= 0 || item.user.name.toLowerCase().indexOf(search) >= 0)
-      
-      if (!res && item.description)
-        res = (item.description.toLowerCase().indexOf(search) >= 0);
-      
-      if (!res && item.ingredients)
-        res = (item.ingredients.toLowerCase().indexOf(search) >= 0);
-         
-      if (!res && item.directions) 
-        res = (item.directions.toLowerCase().indexOf(search) >= 0);
-        
-      if (!res && item.tags)
-        res = (item.tags.toLowerCase().indexOf(search) >= 0);
-    }
-
-    return res;
-  };
-
-  ctrl.$routerOnActivate = function(next) {
+  ctrl.filter = filter;
+  ctrl.$routerOnActivate = routerOnActivate;
+  
+  ////////////
+  function filter(item) {
+    return spiceApi.filter(item, uid, $rootScope.search);
+  }
+  
+  function routerOnActivate(next) {
     console.log('route state: ' + next.params.state);
 
     if (next.params.state && authService.isLoggedIn()) {
@@ -58,5 +38,5 @@ function MyFeedController(spiceApi, $rootRouter, $rootScope, authService) {
       ctrl.spices = data;
       ctrl.loadComplete = true;
     });
-  };
+  }
 };

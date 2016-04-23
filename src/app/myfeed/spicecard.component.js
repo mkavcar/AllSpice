@@ -12,21 +12,25 @@ angular
 SpiceCardController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService'];
 
 function SpiceCardController(spiceApi, $rootRouter, $rootScope, authService) {
-  var 
-  ctrl = this,
+  var ctrl = this,
       user = authService.getUser();
 
-  ctrl.togglePin = function(spiceObj) {
+  ctrl.togglePin = togglePin;
+  ctrl.edit = edit;
+  ctrl.delete = remove;
+  
+  ////////////
+  function togglePin(spiceObj) {
     spiceApi.togglePin(spiceObj);
-  };
-
-  ctrl.edit = function(spiceObj) {
+  }
+  
+  function edit(spiceObj) {
     spiceApi.setObj(spiceObj);
     $rootScope.activeRoute = 'AddSpice';
     $rootRouter.navigate(['AddSpice']);
-  };
-
-  ctrl.delete = function(spiceObj) {
+  }
+  
+  function remove(spiceObj) {
     spiceApi.remove(spiceObj);
-  };
+  }
 };

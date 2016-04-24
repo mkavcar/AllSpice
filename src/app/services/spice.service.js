@@ -97,7 +97,7 @@ function spiceApi($firebaseArray, $firebaseRef, $q, authService) {
     var res = true;
 
     if (uid)
-      res = ((item.user && item.user.uid === uid) || (item.pinnedUsers && item.pinnedUsers[uid] === true));
+      res = ((item.user && item.user.uid === uid) || (item.pinnedUsers && item.pinnedUsers[uid] === true)) ? true : false;
 
     if (search) {
       search = search.toLowerCase();

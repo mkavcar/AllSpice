@@ -16,7 +16,8 @@ var config = {
     html: clientApp + '**/*.html',
     js: [
         clientApp + 'app.module.js',
-		clientApp + '**/*.js'
+		clientApp + '**/*.js',
+        '!' + clientApp + '**/*.spec.js',
 	],
     css: './src/content/*.css',
     templateCache: {

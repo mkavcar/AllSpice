@@ -35,13 +35,21 @@ function authService ($firebaseAuthService, $q) {
       return authObj.$authWithOAuthPopup('google', {
           //remember: "sessionOnly"
         })
-        .then(
-          function(data){
+        .then(function(data) {
             authData = data;
             return authData;
           },
-          function(error){
-            $q.reject(error);
+          function(error) {
+            //if (error.code === "TRANSPORT_UNAVAILABLE") {
+              // fall-back to browser redirects, and pick up the session
+              // automatically when we come back to the origin page
+              authObj.$authWithOAuthRedirect("google").then(function (data) {
+                authData = data;
+                return authData;
+              }, function (error) {
+                $q.reject(error);
+              });
+            //}
           }
         );
     };

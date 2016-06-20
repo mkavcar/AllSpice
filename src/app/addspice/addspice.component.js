@@ -6,15 +6,16 @@ angular
     templateUrl: 'app/addspice/addspice.html'
 });
 
-AddSpiceController.$inject = ['$firebaseArray', 'spiceApi'];
+AddSpiceController.$inject = ['$firebaseArray', 'spiceApi', '$mdDialog'];
 
-function AddSpiceController($firebaseArray, spiceApi) {
+function AddSpiceController($firebaseArray, spiceApi, $mdDialog) {
   var ctrl = this;
   ctrl.add = add;
   ctrl.$routerCanReuse = routerCanReuse;
   ctrl.$routerOnActivate = routerOnActivate;
   ctrl.filterTagList = filterTagList;
   ctrl.ok = ok;
+  ctrl.cancel = cancel;
   
   ////////////
   function add() {
@@ -75,5 +76,9 @@ function AddSpiceController($firebaseArray, spiceApi) {
     }
     
     return null;
+  }
+
+  function cancel() {
+    $mdDialog.hide();
   }
 };

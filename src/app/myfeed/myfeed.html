@@ -1,12 +1,14 @@
-<div class="form-group visible-xs-block" style="padding: 10px;margin: 0;background: #5CB85C;">
+<!--<div class="form-group visible-xs-block" style="padding: 10px;margin: 0;background: #5CB85C;">
     <div class="input-group">
         <div class="input-group-addon">
             <span style="color:#89E894" class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </div>
         <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control search-input" placeholder="Search" style="-webkit-box-shadow:none;box-shadow:none;"></input>
     </div>
-</div>
-<sa-spice-card ng-repeat="spice in $ctrl.spices | orderBy:'-timestamp' | filter: $ctrl.filter as filteredSpices track by spice.$id" spice="spice"></sa-spice-card>
-<div ng-if="$ctrl.loadComplete && filteredSpices.length === 0" class="app-alert app-alert-warning">
-  <h4><span class="glyphicon glyphicon-grain"></span> No spice found</h4>
-</div>
+</div>-->
+<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center" layout-wrap>
+    <sa-spice-card  layout-align="center" ng-repeat="spice in $ctrl.spices | orderBy:'-timestamp' | filter: $ctrl.filter as filteredSpices track by spice.$id" spice="spice"></sa-spice-card>
+    <div ng-if="$ctrl.loadComplete && filteredSpices.length === 0" class="app-alert app-alert-warning">
+        <h4><i class="material-icons">warning</span> No spice found</h4>
+    </div>
+</md-content>

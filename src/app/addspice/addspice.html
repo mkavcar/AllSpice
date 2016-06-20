@@ -1,96 +1,172 @@
 <form novalidate name="$ctrl.spiceForm">
-      <div class="container-fluid" style="max-width:1000px;background:#eee;">
-        
-        <!-- Header -->
-        <div class="row" style="background: #444;padding-left: 10px;">
-          <h2 style="color: #89E894;"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="top: 2px;"></span> {{ ($ctrl.isUpdate) ? 'Edit Spice' : 'Add Spice' }}</h2>
-        </div>
-        
-        <!-- Entry View -->
-        <div class="row" ng-show="$ctrl.showStatus !== true">
-          <div class="col-sm-6" style="padding-top: 15px;">
-            <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine }">
-              <label for="inputName">Name</label>
-              <input type="text" ng-model="$ctrl.spice.name" class="form-control" id="inputName" name="inputName" placeholder="Name" required>
-              <div ng-show="$ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine" ng-messages="$ctrl.spiceForm.inputName.$error" class="help-block" role="alert">
-                <div ng-message="required">This field is required</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputDescription">Description</label>
-              <textarea ng-model="$ctrl.spice.description" class="form-control" id="inputDescription"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="inputImageURL">Image URL</label>
-              <input type="text" ng-model="$ctrl.spice.imageURL" class="form-control" id="inputImageURL" placeholder="Image URL">
-            </div>
-            <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" style="width:100%;margin-bottom: 15px;">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{ ($ctrl.isUpdate) ? 'Edit Spice' : 'Add Spice' }}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+        <md-icon class="material-icons">clear</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content" layout="column" layout-gt-xs="row" layout-padding>
+      <div flex="50">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Name</label>
+          <input ng-model="$ctrl.spice.name" name="name" required>
+          <div ng-messages="$ctrl.spiceForm.name.$error">
+            <div ng-message="required">This field is required</div>
           </div>
-          <div class="col-sm-6" style="background: #ddd;padding-top: 15px;">
-            <div class="row">
-              <div class="col-sm-4">
-                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine }">
-                  <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Prep (min)</label>
-                  <input name="inputPrepTime" ng-model="$ctrl.spice.prepTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
-                  <div ng-show="$ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine" ng-messages="$ctrl.spiceForm.inputPrepTime.$error" class="help-block" role="alert">
-                    <div ng-message="required">Please enter 1-999</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine }">
-                  <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Cook (min)</label>
-                  <input name="inputCookTime" ng-model="$ctrl.spice.cookTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
-                  <div ng-show="$ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine" ng-messages="$ctrl.spiceForm.inputCookTime.$error" class="help-block" role="alert">
-                    <div ng-message="required">Please enter 1-999</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine }">
-                  <label><span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="top: 2px;"></span> Servings</label>
-                  <input name="inputServings" ng-model="$ctrl.spice.servings" class="form-control" type="number" min="1" max="99" ng-maxlength="2">
-                  <div ng-show="$ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine" ng-messages="$ctrl.spiceForm.inputServings.$error" class="help-block" role="alert">
-                    <div ng-message="required">Please enter 1-99</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputIngredients">Ingredients</label>
-              <textarea ng-model="$ctrl.spice.ingredients" rows="4" class="form-control" id="inputIngredients"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="inputDirections">Directions</label>
-              <textarea ng-model="$ctrl.spice.directions" rows="4" class="form-control" id="inputDirections"></textarea>
-            </div>
-            <div class="form-group" style="margin-bottom:0;padding-bottom:15px;">
-              <label for="inputTags">Tags</label>
-              <tags-input ng-model="$ctrl.tags" max-tags="20" add-on-space="true">
-                <auto-complete source="$ctrl.filterTagList($query)" min-length="2" max-results-to-show="6"></auto-complete>
-              </tags-input>
-            </div>
-          </div>
-        </div>
-        <div class="row" ng-show="$ctrl.showStatus !== true">
-          <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
-            <button type="button" class="btn btn-success pull-right" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Submit</button>
-          </div>
-        </div>
-        
-        <!-- Status View -->
-        <div class="row" ng-show="$ctrl.showStatus === true">
-          <div class="col-xs-12" style="padding: 15px;">
-            <div class="app-alert app-alert-success" style="border-color: #4BC74D;">
-              <h4><span class="glyphicon glyphicon-ok" style="top: 6px;padding-right: 10px;color: #4BC74D;"></span>Spice submitted successfully!</h4>
-            </div>
-          </div>
-        </div>
-        <div class="row" ng-show="$ctrl.showStatus === true">
-          <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
-            <button class="btn btn-success pull-right" ng-click="$ctrl.ok()">OK</button>
-          </div>
-        </div>
-        
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Description</label>
+          <input ng-model="$ctrl.spice.description" name="description">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Image URL</label>
+          <input ng-model="$ctrl.spice.imageURL" name="imageURL">
+        </md-input-container>
+        <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" flex="90">
       </div>
-    </form>
+      <div flex="50">
+        <div layout="row">
+          <div flex="33">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Prep (min)</label>
+              <input name="prepTime" ng-model="$ctrl.spice.prepTime" type="number" min="1" max="999" ng-maxlength="3">
+              <div ng-messages="$ctrl.spiceForm.prepTime.$error">
+                <div ng-message="invalid">Please enter 1-999</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div flex="33">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Cook (min)</label>
+              <input name="cookTime" ng-model="$ctrl.spice.cookTime" type="number" min="1" max="999" ng-maxlength="3">
+              <div ng-messages="$ctrl.spiceForm.cookTime.$error">
+                <div ng-message="invalid">Please enter 1-999</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div flex="33">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Servings</label>
+              <input name="servings" ng-model="$ctrl.spice.servings" type="number" min="1" max="99" ng-maxlength="2">
+              <div ng-messages="$ctrl.spiceForm.servings.$error">
+                <div ng-message="invalid">Please enter 1-99</div>
+              </div>
+            </md-input-container>
+          </div>
+        </div>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Ingredients</label>
+          <textarea ng-model="$ctrl.spice.ingredients" rows="5" style="overflow: inherit;"></textarea>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Directions</label>
+          <textarea ng-model="$ctrl.spice.directions" rows="5" style="overflow: inherit;"></textarea>
+        </md-input-container>
+    
+      </div>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <md-button class="md-raised" ng-click="$ctrl.cancel()">Cancel</md-button>
+    <md-button class="md-raised md-primary" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><md-icon class="material-icons">send</md-icon>Submit</md-button>
+  </md-dialog-actions>
+</form>
+
+
+<!--
+    <div class="container-fluid" style="max-width:1000px;background:#eee;">
+      
+      <div class="row" style="background: #444;padding-left: 10px;">
+        <h2 style="color: #89E894;"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="top: 2px;"></span> {{ ($ctrl.isUpdate) ? 'Edit Spice' : 'Add Spice' }}</h2>
+      </div>
+      
+      <div class="row" ng-show="$ctrl.showStatus !== true">
+        <div class="col-sm-6" style="padding-top: 15px;">
+          <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine }">
+            <label for="inputName">Name</label>
+            <input type="text" ng-model="$ctrl.spice.name" class="form-control" id="inputName" name="inputName" placeholder="Name" required>
+            <div ng-show="$ctrl.spiceForm.inputName.$invalid && !$ctrl.spiceForm.inputName.$pristine" ng-messages="$ctrl.spiceForm.inputName.$error" class="help-block" role="alert">
+              <div ng-message="required">This field is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <textarea ng-model="$ctrl.spice.description" class="form-control" id="inputDescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="inputImageURL">Image URL</label>
+            <input type="text" ng-model="$ctrl.spice.imageURL" class="form-control" id="inputImageURL" placeholder="Image URL">
+          </div>
+          <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" style="width:100%;margin-bottom: 15px;">
+        </div>
+        <div class="col-sm-6" style="background: #ddd;padding-top: 15px;">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine }">
+                <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Prep (min)</label>
+                <input name="inputPrepTime" ng-model="$ctrl.spice.prepTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
+                <div ng-show="$ctrl.spiceForm.inputPrepTime.$invalid && !$ctrl.spiceForm.inputPrepTime.$pristine" ng-messages="$ctrl.spiceForm.inputPrepTime.$error" class="help-block" role="alert">
+                  <div ng-message="required">Please enter 1-999</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine }">
+                <label><span class="glyphicon glyphicon-time" aria-hidden="true" style="top: 2px;"></span> Cook (min)</label>
+                <input name="inputCookTime" ng-model="$ctrl.spice.cookTime" class="form-control" type="number" min="1" max="999" ng-maxlength="3">
+                <div ng-show="$ctrl.spiceForm.inputCookTime.$invalid && !$ctrl.spiceForm.inputCookTime.$pristine" ng-messages="$ctrl.spiceForm.inputCookTime.$error" class="help-block" role="alert">
+                  <div ng-message="required">Please enter 1-999</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group" ng-class="{ 'has-error': $ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine }">
+                <label><span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="top: 2px;"></span> Servings</label>
+                <input name="inputServings" ng-model="$ctrl.spice.servings" class="form-control" type="number" min="1" max="99" ng-maxlength="2">
+                <div ng-show="$ctrl.spiceForm.inputServings.$invalid && !$ctrl.spiceForm.inputServings.$pristine" ng-messages="$ctrl.spiceForm.inputServings.$error" class="help-block" role="alert">
+                  <div ng-message="required">Please enter 1-99</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputIngredients">Ingredients</label>
+            <textarea ng-model="$ctrl.spice.ingredients" rows="4" class="form-control" id="inputIngredients"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="inputDirections">Directions</label>
+            <textarea ng-model="$ctrl.spice.directions" rows="4" class="form-control" id="inputDirections"></textarea>
+          </div>
+          <div class="form-group" style="margin-bottom:0;padding-bottom:15px;">
+            <label for="inputTags">Tags</label>
+            <tags-input ng-model="$ctrl.tags" max-tags="20" add-on-space="true">
+              <auto-complete source="$ctrl.filterTagList($query)" min-length="2" max-results-to-show="6"></auto-complete>
+            </tags-input>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="$ctrl.showStatus !== true">
+        <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
+          <button type="button" class="btn btn-success pull-right" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Submit</button>
+        </div>
+      </div>
+      
+      <div class="row" ng-show="$ctrl.showStatus === true">
+        <div class="col-xs-12" style="padding: 15px;">
+          <div class="app-alert app-alert-success" style="border-color: #4BC74D;">
+            <h4><span class="glyphicon glyphicon-ok" style="top: 6px;padding-right: 10px;color: #4BC74D;"></span>Spice submitted successfully!</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="$ctrl.showStatus === true">
+        <div class="col-xs-12" style="background:#89E894;padding-top: 15px;padding-bottom: 10px;">
+          <button class="btn btn-success pull-right" ng-click="$ctrl.ok()">OK</button>
+        </div>
+      </div>
+      
+    </div>
+  -->

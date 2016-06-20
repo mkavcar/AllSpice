@@ -1,4 +1,30 @@
-<div class="container-fluid" style="max-width:1000px;margin-bottom:15px;background:#ccc">
+<md-card style="max-width: 550px;">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">{{::$ctrl.spice.name}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <img class="md-card-image" ng-src="{{::$ctrl.spice.imageURL}}">
+  <md-card-header>
+    <md-card-avatar>
+      <img class="md-user-avatar" ng-src="{{::$ctrl.spice.user.profileImageURL}}"/>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="md-title" ng-click="$root.search = $ctrl.spice.user.name">{{::$ctrl.spice.user.name}}</span>
+      <span class="md-subhead">{{::$ctrl.spice.timestamp | date:'short'}}</span>
+    </md-card-header-text>
+  </md-card-header>
+  <md-card-content>
+    <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Ingredients</h3>
+    <div style="white-space: pre-wrap;">{{::$ctrl.spice.ingredients}}</div>
+  </md-card-content>
+  <md-card-content>
+    <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Directions</h3>
+    <div style="white-space: pre-wrap;">{{::$ctrl.spice.directions}}</div>
+  </md-card-content>
+</md-card>
+
+<!--
       <div class="row animate-show-flipInX" ng-if="$root.auth.isLoggedIn()">
             <div ng-if="$ctrl.showConfirm !== true" class="col-xs-12 animate-show-flipInX" style="background:#89E894;padding-bottom:10px;padding-top:10px;">
               <button ng-if="$root.auth.getUser().uid !== $ctrl.spice.user.uid" ng-click="$ctrl.togglePin($ctrl.spice)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-heart" aria-hidden="true" title="Pin\Unpin to My Feed"></span> {{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'Unpin' : 'Pin' }}</button>
@@ -60,4 +86,4 @@
           <div style="white-space: pre-wrap;">{{::$ctrl.spice.directions}}</div>
         </div>
       </div>
-    </div>
+    -->

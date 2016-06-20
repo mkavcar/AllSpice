@@ -1,12 +1,12 @@
-<button ng-if="!$ctrl.isLoggedIn()" class="btn btn-success"" ng-click="$ctrl.login()"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</button>
+<md-button ng-if="!$ctrl.isLoggedIn()" class="md-raised md-primary" ng-click="$ctrl.login()"><md-icon class="material-icons">person</md-icon> Login</button>
 
-<ul ng-if="$ctrl.isLoggedIn()" class="userDropdown">
-  <li>
-    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <img ng-src="{{$ctrl.authData.google.profileImageURL}}"><span class="hidden-xs">{{ $ctrl.authData.google.displayName }}&nbsp;&nbsp;</span><span style="color:#89E894;" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>
-    </ul>
-  </li>
-</ul>
+<md-menu ng-if="$ctrl.isLoggedIn()">
+  <md-button><img ng-src="{{$ctrl.authData.google.profileImageURL}}"><span class="hide-xs">{{ $ctrl.authData.google.displayName }}</span></md-button>
+  <md-menu-content width="4">
+    <md-menu-item>
+      <md-button ng-click="$ctrl.logout()">
+        Logout
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

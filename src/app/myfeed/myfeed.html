@@ -6,9 +6,15 @@
         <input ng-model="$root.search" ng-model-options="{ debounce: 250 }" type="text" class="form-control search-input" placeholder="Search" style="-webkit-box-shadow:none;box-shadow:none;"></input>
     </div>
 </div>-->
-<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center" layout-wrap>
+<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center" layout-wrap style="background: #777;">
     <sa-spice-card  layout-align="center" ng-repeat="spice in $ctrl.spices | orderBy:'-timestamp' | filter: $ctrl.filter as filteredSpices track by spice.$id" spice="spice"></sa-spice-card>
-    <div ng-if="$ctrl.loadComplete && filteredSpices.length === 0" class="app-alert app-alert-warning">
-        <h4><i class="material-icons">warning</span> No spice found</h4>
-    </div>
+</md-content>
+<md-content ng-if="$ctrl.loadComplete && filteredSpices.length === 0" class="md-padding" style="background: #777;">
+    <md-card style="border-left-width:8px;border-left-style:solid" md-colors="::{'border-left-color': 'accent'}">
+        <md-card-content>
+        <h3 style="font-weight:normal;">
+            <md-icon class="material-icons" style="top: -1px;position: relative;">error_outline</md-icon> No spice found
+        </h3>
+        </md-card-content>
+    </md-card>
 </md-content>

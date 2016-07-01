@@ -96,8 +96,12 @@ function spiceApi($firebaseArray, $firebaseRef, $q, authService) {
   function filter(item, uid, search) {
     var res = true;
 
-    if (uid)
-      res = ((item.user && item.user.uid === uid) || (item.pinnedUsers && item.pinnedUsers[uid] === true)) ? true : false;
+    if (uid) {
+      if (authService.isLoggedIn())
+        res = ((item.user && item.user.uid === uid) || (item.pinnedUsers && item.pinnedUsers[uid] === true)) ? true : false;
+      else
+        res = ((item.user && item.user.uid === uid)) ? true : false;
+    }
 
     if (search) {
       search = search.toLowerCase();
@@ -115,6 +119,9 @@ function spiceApi($firebaseArray, $firebaseRef, $q, authService) {
         
       if (!res && item.tags)
         res = (item.tags.toLowerCase().indexOf(search) >= 0);
+      
+      if (!res && item.user)
+        res = (item.user.uid.toLowerCase().indexOf(search) >= 0);
     }
 
     return res;

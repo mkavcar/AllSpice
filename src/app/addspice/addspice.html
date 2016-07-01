@@ -1,5 +1,5 @@
 <form novalidate name="$ctrl.spiceForm">
-  <md-toolbar>
+  <md-toolbar class="md-hue-3">
     <div class="md-toolbar-tools">
       <h2>{{ ($ctrl.isUpdate) ? 'Edit Spice' : 'Add Spice' }}</h2>
       <span flex></span>
@@ -10,7 +10,7 @@
   </md-toolbar>
   <md-dialog-content>
     <div class="md-dialog-content" layout="column" layout-gt-xs="row" layout-padding>
-      <div flex="50">
+      <div flex="50" layout="column" layout-fill>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Name</label>
           <input ng-model="$ctrl.spice.name" name="name" required>
@@ -26,10 +26,10 @@
           <label>Image URL</label>
           <input ng-model="$ctrl.spice.imageURL" name="imageURL">
         </md-input-container>
-        <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" flex="90">
+        <img ng-show="$ctrl.spice.imageURL" ng-src="{{$ctrl.spice.imageURL}}" style="max-width: 100%;">
       </div>
-      <div flex="50">
-        <div layout="row">
+      <div flex="50" layout="column">
+        <div flex layout="row" layout-fill>
           <div flex="33">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Prep (min)</label>
@@ -60,11 +60,11 @@
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Ingredients</label>
-          <textarea ng-model="$ctrl.spice.ingredients" rows="5" style="overflow: inherit;"></textarea>
+          <textarea ng-model="$ctrl.spice.ingredients" rows="5" style="overflow: inherit;max-height: 250px!important;"></textarea>
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Directions</label>
-          <textarea ng-model="$ctrl.spice.directions" rows="5" style="overflow: inherit;"></textarea>
+          <textarea ng-model="$ctrl.spice.directions" rows="5" style="overflow: inherit;max-height: 250px!important;"></textarea>
         </md-input-container>
     
       </div>
@@ -72,7 +72,7 @@
   </md-dialog-content>
   <md-dialog-actions layout="row">
     <md-button class="md-raised" ng-click="$ctrl.cancel()">Cancel</md-button>
-    <md-button class="md-raised md-primary" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><md-icon class="material-icons">send</md-icon>Submit</md-button>
+    <md-button class="md-raised md-primary md-hue-3" ng-click="$ctrl.add()" ng-disabled="$ctrl.spiceForm.$invalid"><md-icon class="material-icons">send</md-icon> Submit</md-button>
   </md-dialog-actions>
 </form>
 

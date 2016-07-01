@@ -1,8 +1,8 @@
-<md-button ng-if="!$ctrl.isLoggedIn()" class="md-raised md-primary" ng-click="$ctrl.login()"><md-icon class="material-icons">person</md-icon> Login</button>
+<md-button ng-if="!$ctrl.isLoggedIn()" class="md-accent md-hue-2" style="min-width: 1%;margin: 0;" ng-click="$ctrl.login()"><md-icon class="material-icons">person</md-icon><span class="hide-xs"> Login</span></md-button>
 
 <md-menu ng-if="$ctrl.isLoggedIn()">
-  <md-button><img ng-src="{{$ctrl.authData.google.profileImageURL}}"><span class="hide-xs">{{ $ctrl.authData.google.displayName }}</span></md-button>
-  <md-menu-content width="4">
+  <md-button ng-click="$mdOpenMenu($event)" style="min-width: 1%;margin: 0;"><img ng-src="{{$ctrl.authData.google.profileImageURL}}" style="width: 40px;border-radius: 50%;vertical-align: middle;margin-right: 6px;min-width: 1%;margin: 0;"><span class="hide-xs" style="padding-left: 6px;">{{ $ctrl.authData.google.displayName }}</span></md-button>
+  <md-menu-content width="3">
     <md-menu-item>
       <md-button ng-click="$ctrl.logout()">
         Logout

@@ -1,4 +1,32 @@
 <md-card style="max-width: 550px;">
+  <md-toolbar ng-if="$root.auth.isLoggedIn()" ng-class="{'md-warn':$ctrl.showConfirm === true, '':$ctrl.showConfirm !== true}" style="min-height: 48px;">
+    <div ng-if="$ctrl.showConfirm !== true" class="md-toolbar-tools" style="height: 48px;">
+      <md-button ng-if="$root.auth.getUser().uid !== $ctrl.spice.user.uid" ng-click="$ctrl.togglePin($ctrl.spice)" class="md-accent" style="min-width: 1%;">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true" title="Pin\Unpin to My Feed"></span>
+        <md-icon class="material-icons">{{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'favorite_border' : 'favorite' }}</md-icon> 
+        {{ ($ctrl.spice.pinnedUsers[$root.auth.getUser().uid] === true) ? 'Unpin' : 'Pin' }}
+      </md-button>
+      <md-button ng-if="$root.auth.getUser().uid === $ctrl.spice.user.uid" class="md-accent" style="min-width: 1%;" ng-click="$ctrl.edit($ctrl.spice, $event)">
+        <md-icon class="material-icons">edit</md-icon>
+        Edit
+      </md-button>
+      <md-button ng-if="$root.auth.getUser().uid === $ctrl.spice.user.uid" class="md-accent" style="min-width: 1%;" ng-click="$ctrl.showConfirm = true">
+        <md-icon class="material-icons">delete</md-icon>
+        Delete
+      </md-button>
+    </div>
+    <div ng-if="$ctrl.showConfirm === true" class="md-toolbar-tools" style="height: 48px;" layout-align="end center">
+      <h6 flex><span><md-icon class="material-icons" style="color: white;margin-right:6px;">info</md-icon>Are you sure you want to delete this spice?</span></h6>
+      <md-button class="md-primary md-hue-2" ng-click="$ctrl.showConfirm = false" style="margin-right: 0;">
+        <md-icon class="material-icons">not_interested</md-icon>
+        Cancel
+      </md-button>
+      <md-button class="md-primary md-hue-2" ng-click="$ctrl.delete($ctrl.spice)">
+        <md-icon class="material-icons">delete</md-icon>
+        Delete
+      </md-button>
+    </div>
+  </md-toolbar>
   <md-card-title>
     <md-card-title-text>
       <span class="md-headline">{{::$ctrl.spice.name}}</span>
@@ -6,20 +34,42 @@
   </md-card-title>
   <img class="md-card-image" ng-src="{{::$ctrl.spice.imageURL}}">
   <md-card-header>
-    <md-card-avatar>
+    <md-card-avatar style="margin-right: 12px;">
       <img class="md-user-avatar" ng-src="{{::$ctrl.spice.user.profileImageURL}}"/>
     </md-card-avatar>
     <md-card-header-text>
-      <span class="md-title" ng-click="$root.search = $ctrl.spice.user.name">{{::$ctrl.spice.user.name}}</span>
+      <a class="md-title" href="#" ng-click="$ctrl.filter($ctrl.spice.user.name)" style="color: inherit;text-decoration: none;"><strong>{{::$ctrl.spice.user.name}}</strong></a>
       <span class="md-subhead">{{::$ctrl.spice.timestamp | date:'short'}}</span>
     </md-card-header-text>
   </md-card-header>
-  <md-card-content>
-    <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Ingredients</h3>
+  <md-card-content style="padding-top:0;padding-bottom:0;">
+    <div flex layout="row" layout-fill>
+      <div flex="33">
+        <label>Prep (min)</label>
+        <h2 md-colors="::{color: 'accent'}" style="font-weight: normal;margin-top: 8px;">{{::($ctrl.spice.prepTime) ? $ctrl.spice.prepTime : '-'}}</h2>
+      </div>
+      <div flex="33">
+        <label>Cook (min)</label>
+        <h2 md-colors="::{color: 'accent'}" style="font-weight: normal;margin-top: 8px;">{{::($ctrl.spice.cookTime) ? $ctrl.spice.cookTime : '-'}}</h2>
+      </div>
+      <div flex="33">
+        <label>Servings</label>
+        <h2 md-colors="::{color: 'accent'}" style="font-weight: normal;margin-top: 8px;">{{::($ctrl.spice.servings) ? $ctrl.spice.servings : '-'}}</h2>
+      </div>
+    </div>
+  </md-card-content>
+  <md-card-content style="padding-top:0;padding-bottom:0;">
+    {{::$ctrl.spice.description}}          
+  </md-card-content>
+  <md-card-content ng-if="::$ctrl.spice.tags">
+    <md-button class="md-accent md-raised" ng-repeat="tag in ::$ctrl.spice.tags.split(',')" ng-click="$ctrl.filter(tag)" style="font-size: 12px;min-width: 1%;min-height: 1%;line-height: 28px;">{{ ::tag }}</md-button>
+  </md-card-content>
+  <md-card-content md-colors="::{'border-top-color': 'accent'}" style="border-top-width:1px;border-top-style: solid;background:#eee;">
+    <h3 style="margin-top:0px;">Ingredients</h3>
     <div style="white-space: pre-wrap;">{{::$ctrl.spice.ingredients}}</div>
   </md-card-content>
-  <md-card-content>
-    <h3 style="border-bottom: 1px solid #ccc;padding-bottom: 10px;margin-top:0px;">Directions</h3>
+  <md-card-content md-colors="::{'border-top-color': 'accent'}" style="border-top-width:1px;border-top-style: solid;background:#dedede;">
+    <h3 style="margin-top:0px;">Directions</h3>
     <div style="white-space: pre-wrap;">{{::$ctrl.spice.directions}}</div>
   </md-card-content>
 </md-card>

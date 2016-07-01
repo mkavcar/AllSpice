@@ -6,34 +6,24 @@ angular
     templateUrl: 'app/myfeed/myfeed.html'
 });
 
-MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService'];
+MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService', 'searchService', '$scope'];
   
-function MyFeedController(spiceApi, $rootRouter, $rootScope, authService) {
+function MyFeedController(spiceApi, $rootRouter, $rootScope, authService, searchService, $scope) {
   var ctrl = this,
-      uid = null;    
+      search = {};    
 
   ctrl.filter = filter;
-  ctrl.$routerOnActivate = routerOnActivate;
+
+  searchService.subscribe($scope, routerOnActivate());
   
   ////////////
   function filter(item) {
-    return spiceApi.filter(item, uid, $rootScope.search);
+    return spiceApi.filter(item, search.uid, search.text);
   }
   
   function routerOnActivate(next) {
-    console.log('route state: ' + next.params.state);
-
-    if (next.params.state && authService.isLoggedIn()) {
-      var user = authService.getUser();
-      uid = user.uid;
-
-      $rootScope.activeRoute = 'MySpice';
-    }
-    else {
-      uid = null;
-      $rootScope.activeRoute = 'MyFeed';
-    }
-
+    search = searchService.get();
+    
     spiceApi.getAll().$loaded(function(data) {
       ctrl.spices = data;
       ctrl.loadComplete = true;

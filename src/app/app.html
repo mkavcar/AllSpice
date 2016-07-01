@@ -1,17 +1,25 @@
-<md-toolbar class="">
-  <div class="md-toolbar-tools">
-    <h2>All Spice</h2>
-    <md-button ng-link="['MyFeed']">My Feed</md-button>
-    <md-button ng-link="['MyFeed', {state: 'mySpice'}]">My Spice</md-button>
-    <span flex></span>
-    <sa-login-button></sa-login-button>
-  </div>
-</md-toolbar>  
-<ng-outlet></ng-outlet>
-<md-button ng-show="!$root.auth.isLoggedIn()" ng-click="$ctrl.openAddSpice($event)" class="md-primary md-fab md-fab-bottom-right" title="Add Spice">
-  <md-icon class="material-icons">add</md-icon>
-</md-button>
-
+<div layout='column' layout-fill>
+  <md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+      <h2 style="white-space:nowrap;"><md-icon class="material-icons" md-colors="::{color: 'accent-A400'}">spa</md-icon> All Spice</h2>
+      <span flex></span>
+      <md-button class="md-icon-button md-accent md-hue-2" style="margin: 0;" aria-label="Filter">
+        <md-icon class="material-icons">favorite_border</md-icon>
+      </md-button>
+      <md-input-container md-no-float class="md-accent toolbar-input" flex="30">
+        <md-icon class="material-icons" md-colors="::{color: 'accent-A400'}" style="top: 4px;">search</md-icon>
+        <input ng-model="$ctrl.search" ng-change="$ctrl.onSearchChange()" ng-model-options="{ debounce: 250 }" type="text" md-colors="::{color: 'accent-A100'}" aria-label="Search">
+      </md-input-container>      
+      <sa-login-button></sa-login-button>
+    </div>
+  </md-toolbar>
+  <md-content flex style="background: #777;">  
+    <ng-outlet></ng-outlet>
+  </md-content>
+  <md-button ng-show="!$root.auth.isLoggedIn()" ng-click="$ctrl.openAddSpice($event)" class="md-accent md-fab md-fab-bottom-right" title="Add Spice" style="position:fixed">
+    <md-icon class="material-icons">add</md-icon>
+  </md-button>
+</div>
 <!--
       <div class="container-fluid">
         <sa-login-button class="pull-right" style="margin-top:8px;"></sa-login-button>

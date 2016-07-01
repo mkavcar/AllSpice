@@ -11,11 +11,11 @@ AddSpiceController.$inject = ['$firebaseArray', 'spiceApi', '$mdDialog'];
 function AddSpiceController($firebaseArray, spiceApi, $mdDialog) {
   var ctrl = this;
   ctrl.add = add;
-  ctrl.$routerCanReuse = routerCanReuse;
-  ctrl.$routerOnActivate = routerOnActivate;
   ctrl.filterTagList = filterTagList;
   ctrl.ok = ok;
   ctrl.cancel = cancel;
+
+  init();
   
   ////////////
   function add() {
@@ -36,11 +36,7 @@ function AddSpiceController($firebaseArray, spiceApi, $mdDialog) {
     ctrl.showStatus = true;      
   }
 
-  function routerCanReuse() {
-    return false;
-  }
-  
-  function routerOnActivate() {
+  function init() {
     ctrl.spice = spiceApi.getObj();
     ctrl.tags = initTags();
     ctrl.isUpdate = (ctrl.spice);

@@ -18,7 +18,7 @@ function config($locationProvider, $firebaseRefProvider, FirebaseUrl, $mdTheming
     });
     
     //theme
-    var customPrimary = {
+    /*var customPrimary = {
         '50': '#7be487',
         '100': '#66df74',
         '200': '#50db60',
@@ -77,9 +77,9 @@ function config($locationProvider, $firebaseRefProvider, FirebaseUrl, $mdTheming
     $mdThemingProvider
         .definePalette('customBackground', 
                         customBackground);
-
-   $mdThemingProvider.theme('default')
-       .primaryPalette('customPrimary')
-       .accentPalette('customAccent');
+*/
+   //$mdThemingProvider.theme('default')
+     //  .primaryPalette('customPrimary')
+       //.accentPalette('customAccent');
        //.backgroundPalette('customBackground')
 }

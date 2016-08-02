@@ -6,13 +6,18 @@ angular
     templateUrl: 'app/myfeed/myfeed.html'
 });
 
-MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService', 'searchService', '$scope'];
+MyFeedController.$inject = ['spiceApi', '$rootRouter', '$rootScope', 'authService', 'searchService', '$scope', '$log'];
   
-function MyFeedController(spiceApi, $rootRouter, $rootScope, authService, searchService, $scope) {
+function MyFeedController(spiceApi, $rootRouter, $rootScope, authService, searchService, $scope, $log) {
   var ctrl = this,
       search = {};    
 
   ctrl.filter = filter;
+
+  //test warning
+  //$log.warn('Test Warning');
+  //throw test error
+  //x=y;
 
   searchService.subscribe($scope, routerOnActivate());
   

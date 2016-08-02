@@ -10,9 +10,9 @@ angular
     ]
 });
 
-AppController.$inject = ['$rootScope', '$rootRouter', 'authService', 'spiceApi', '$mdDialog', 'searchService', '$scope'];
+AppController.$inject = ['$rootScope', '$rootRouter', 'authService', 'spiceApi', '$mdDialog', 'searchService', '$scope' ,'$interval', 'logApi', '$http'];
 
-function AppController($rootScope, $rootRouter, authService, spiceApi, $mdDialog, searchService, $scope) {
+function AppController($rootScope, $rootRouter, authService, spiceApi, $mdDialog, searchService, $scope ,$interval, logApi, $http) {
   var ctrl = this;
   $rootScope.auth = authService;
   
@@ -38,4 +38,9 @@ function AppController($rootScope, $rootRouter, authService, spiceApi, $mdDialog
   function onSearchChange() {
     searchService.publish(ctrl.search);
   }
+  
+  $interval(function () {
+    //logApi.shipLogs($http);
+    
+  }, 2000);
 };
